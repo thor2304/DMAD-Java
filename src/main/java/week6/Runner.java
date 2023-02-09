@@ -1,16 +1,21 @@
 package week6;
 
-import week6.tools.Timing;
+import tools.Timing;
 
 import java.util.*;
 
 
-public class runner {
-    public static List<Integer> permutationGenerator(int length) {
+public class Runner {
+
+    public static List<Integer> generateList(int length){
         ArrayList<Integer> out = new ArrayList<>();
         for (int i = 0; i < length; i++) {
             out.add(i);
         }
+        return out;
+    }
+    public static List<Integer> permutationGenerator(int length) {
+        List<Integer> out = generateList(length);
         Collections.shuffle(out);
         return out;
     }
@@ -52,7 +57,7 @@ public class runner {
         return counts;
     }
 
-    public static void statGenereator(int SIZE, int RUNS) {
+    public static void statGenerator(int SIZE, int RUNS) {
         ArrayList<Integer> counts = runLoops(SIZE, RUNS);
 
         for (int i = 0; i < counts.size(); i++) {
@@ -72,11 +77,11 @@ public class runner {
 
     public static void main(String[] args) {
 //        testCounter();
-        final int SIZE = 64;
-        final int RUNS = 1000_000;
+        final int SIZE = 100;
+        final int RUNS = 100_000;
 
         Timing.start("single thread");
-        statGenereator(SIZE, RUNS);
+        statGenerator(SIZE, RUNS);
         Timing.end("single thread");
     }
 }
