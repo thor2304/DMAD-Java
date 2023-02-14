@@ -43,7 +43,6 @@ public class TaskB1 {
         System.out.printf("Average time of %s was %d %s", name2, time / loops, "\n\n");
 
 
-
         String name3 = "Insertion sort on reverse sorted list";
         time = 0;
         for (int i = 0; i < loops; i++) {
