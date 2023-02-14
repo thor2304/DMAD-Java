@@ -28,6 +28,7 @@ public class TaskB1 {
             sortedList = insertionSort(testList);
             Timing.end(name1);
             time += Timing.getTime(name1);
+            testList = Runner.permutationGenerator(listSize);
         }
         System.out.printf("Average time of %s was %d %s", name1, time / loops, "\n\n");
 

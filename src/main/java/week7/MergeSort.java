@@ -17,7 +17,7 @@ public class MergeSort {
     }
 
     public static List<Integer> mergeSort(List<Integer> inputList) {
-        return mergeSplitter(inputList);
+        return mergeSplitterListDriven(inputList);
     }
 
     /**
@@ -27,7 +27,7 @@ public class MergeSort {
      * @param inputListB Sorted List
      * @return A sorted list that contains the elements from both lists
      */
-    private static List<Integer> mergeCombiner(List<Integer> inputListA, List<Integer> inputListB) {
+    private static List<Integer> mergeCombinerListDriven(List<Integer> inputListA, List<Integer> inputListB) {
         int indexA = 0, indexB = 0;
         ArrayList<Integer> output = new ArrayList<>();
 
@@ -56,18 +56,18 @@ public class MergeSort {
         return output;
     }
 
-    private static List<Integer> mergeSplitter(List<Integer> inputList) {
+    private static List<Integer> mergeSplitterListDriven(List<Integer> inputList) {
         if (inputList.size() > 2) {
             int size = inputList.size();
             int half = size / 2;
             List<Integer> listA = inputList.subList(0, half);
             List<Integer> listB = inputList.subList(half, size);
 
-            return mergeCombiner(
-                    mergeSplitter(listA), mergeSplitter(listB)
+            return mergeCombinerListDriven(
+                    mergeSplitterListDriven(listA), mergeSplitterListDriven(listB)
             );
         }else if(inputList.size() == 2){
-            return mergeCombiner(inputList.subList(0, 1), inputList.subList(1,2));
+            return mergeCombinerListDriven(inputList.subList(0, 1), inputList.subList(1,2));
         }else {
             return inputList;
         }
