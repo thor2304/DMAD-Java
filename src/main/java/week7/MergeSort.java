@@ -20,6 +20,10 @@ public class MergeSort {
         return mergeSplitterListDriven(inputList);
     }
 
+    public static Integer[] mergeSortUsingArray(Integer[] inputList){
+        return mergeSplitterArrayDriven(inputList);
+    }
+
     /**
      * Assumes that the two inputs are sorted
      *
@@ -71,5 +75,67 @@ public class MergeSort {
         }else {
             return inputList;
         }
+    }
+
+    private static Integer[] mergeCombinerArrayDriven(Integer[] inputArrayA, Integer[] inputArrayB){
+        int indexA = 0, indexB = 0, outputIndex = 0;
+
+        Integer[] output = new Integer[inputArrayA.length + inputArrayB.length];
+
+        while (indexA < inputArrayA.length && indexB < inputArrayB.length){
+            int a = inputArrayA[indexA];
+            int b = inputArrayB[indexB];
+
+            if (a < b){
+                indexA++;
+                output[outputIndex++] = a;
+            }else {
+                indexB++;
+                output[outputIndex++] = b;
+            }
+        }
+
+        if (indexA < inputArrayA.length){
+            outputIndex = addToArray(output, outputIndex, inputArrayA, indexA);
+        }else if(indexB < inputArrayB.length){
+            outputIndex = addToArray(output, outputIndex, inputArrayB, indexB);
+        }
+
+        return output;
+    }
+
+    /**
+     *
+     * @param addTo
+     * @param addToIndex
+     * @param addFrom
+     * @param addFromIndex
+     * @return The new value of output index, addToIndex
+     */
+    private static int addToArray(Integer[] addTo, int addToIndex, Integer[] addFrom, int addFromIndex){
+        while (addFromIndex < addTo.length && addFromIndex < addFrom.length){
+            addTo[addToIndex++] = addFrom[addFromIndex++];
+        }
+
+        return addToIndex;
+    }
+
+    private static Integer[] mergeSplitterArrayDriven(Integer[] inputArray){
+        if (inputArray.length > 2){
+            int half = inputArray.length / 2;
+            Integer[] listA = new Integer[half];
+            Integer[] listB = new Integer[inputArray.length - half];
+            System.arraycopy(inputArray, 0, listA, 0, half);
+            System.arraycopy(inputArray, half, listB, 0, inputArray.length - half);
+
+            return mergeCombinerArrayDriven(
+                    mergeSplitterArrayDriven(listA), mergeSplitterArrayDriven(listB)
+            );
+        }else if (inputArray.length == 2){
+            return mergeCombinerArrayDriven(new Integer[]{inputArray[0]}, new Integer[]{inputArray[1]});
+        }else {
+            return inputArray;
+        }
+
     }
 }

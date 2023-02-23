@@ -77,8 +77,8 @@ public class Runner {
 
     public static void main(String[] args) {
 //        testCounter();
-        final int SIZE = 100;
-        final int RUNS = 100_000;
+        final int SIZE = 64;
+        final int RUNS = 10_000_000;
 
         Timing.start("single thread");
         statGenerator(SIZE, RUNS);
